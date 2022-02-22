@@ -1,52 +1,38 @@
-class Solution {
+class Solution { // Works iterative
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
         vector<vector<int>> subsets;
-        vector<int> subset;
-        recurse(nums, 0, subset, subsets);
+        subsets.push_back({});
+        for (int i = 0; i < n; i++) {
+            int k = subsets.size();
+            for (int j = 0; j < k; j++) {
+                subsets.push_back(subsets[j]);
+                subsets.back().push_back(nums[i]);
+            }
+        }
         return subsets;
-    }
-    void recurse(vector<int>& nums, int i, vector<int>& subset, vector<vector<int>>& subsets) {
-        if (i == nums.size()) {subsets.push_back(subset); return;}
-        recurse(nums, i+1, subset, subsets);
-        subset.push_back(nums[i]);
-        recurse(nums, i+1, subset, subsets);
-        subset.pop_back();
     }
 };
 
+// class Solution { // Works recursion again
+// public:
+//     vector<vector<int>> subsets(vector<int>& nums) {
+//         vector<vector<int>> subsets;
+//         vector<int> subset;
+//         recurse(nums, 0, subset, subsets);
+//         return subsets;
+//     }
+//     void recurse(vector<int>& nums, int i, vector<int>& subset, vector<vector<int>>& subsets) {
+//         if (i == nums.size()) {subsets.push_back(subset); return;}
+//         recurse(nums, i+1, subset, subsets);
+//         subset.push_back(nums[i]);
+//         recurse(nums, i+1, subset, subsets);
+//         subset.pop_back();
+//     }
+// };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class Solution {
+// class Solution { //Works recursion
 // public:
 //     vector<vector<int>> subsets(vector<int>& nums) {
 //         int n = nums.size();
