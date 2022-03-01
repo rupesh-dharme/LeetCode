@@ -12,13 +12,9 @@ public:
             result.push_back(combination);
             return;
         }
-        // unordered_set<int> us;
         for (int j = i; j < n; j++) {
             if (c[j]> target) break;
             if (j != i && c[j] == c[j-1]) continue;
-            // if (us.count(c[j])) continue;
-            // us.insert(c[j]);
-            // combinations(c, i+1, n, combination, result, target);
             combination.push_back(c[j]);
             combinations(c, j+1, n, combination, result, target-c[j]);
             combination.pop_back();
