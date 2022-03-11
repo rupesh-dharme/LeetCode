@@ -12,18 +12,18 @@ class Solution
     {
         vector<int> distTo(V, INT_MAX);
         distTo[S] = 0;
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        pq.push({S, 0});
-        while (!pq.empty()) {
-            auto node = pq.top().first;
-            auto dist = pq.top().second;
-            pq.pop();
-            for (auto nxt: adj[node]) {
-                auto next = nxt[0];
-                auto distNext = nxt[1];
-                if (distTo[next] > dist + distNext) {
-                    distTo[next] = dist + distNext;
-                    pq.push({next, distTo[next]});
+        queue<pair<int, int>> q;
+        q.push({S, 0});
+        while (!q.empty()) {
+            auto node = q.front().first;
+            auto dist = q.front().second;
+            q.pop();
+            for (auto next : adj[node]) {
+                auto nextNode = next[0];
+                auto nextDist = next[1];
+                if (distTo[nextNode] > dist + nextDist) {
+                    distTo[nextNode] = dist + nextDist;
+                    q.push({nextNode, distTo[nextNode]});
                 }
             }
         }
