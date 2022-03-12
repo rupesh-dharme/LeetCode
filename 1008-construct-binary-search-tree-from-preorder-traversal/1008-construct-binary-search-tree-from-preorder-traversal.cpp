@@ -20,13 +20,13 @@ public:
             TreeNode* root = new TreeNode(pre[s]);
             return root;
         }
-        int s2 = s+1;
-        for (; s2 <= e; s2++) {
-            if (pre[s2] > pre[s]) break;
+        int mid = s+1;
+        for (; mid <= e; mid++) {
+            if (pre[mid] > pre[s]) break;
         }
         TreeNode* root = new TreeNode(pre[s]);
-        root->left = create(pre, s+1, s2-1);
-        root->right = create(pre, s2, e);
+        root->left = create(pre, s+1, mid-1);
+        root->right = create(pre, mid, e);
         return root;
     }
 };
