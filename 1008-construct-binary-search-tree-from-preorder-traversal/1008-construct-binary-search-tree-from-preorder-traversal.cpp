@@ -15,8 +15,8 @@ public:
         int i = 0;
         return create(preorder, i, INT_MAX);
     }
-    TreeNode* create(vector<int>& pre, int& i, int upper) {
-        if (i >= pre.size() || pre[i] > upper) return NULL;
+    TreeNode* create(vector<int>& pre, int & i, int upper) {
+        if (i >= pre.size() || pre[i] > upper) return nullptr;
         TreeNode* root = new TreeNode(pre[i++]);
         root->left = create(pre, i, root->val);
         root->right = create(pre, i, upper);
