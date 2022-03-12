@@ -2,15 +2,29 @@ class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
         int mx = INT_MIN;
-        int sum = 0;
+        int curr = 0;
         for (auto num : nums) {
-            sum += num;
-            mx = max(sum, mx);
-            if (sum < 0) sum = 0;
+            curr += num;
+            mx = max(mx, curr);
+            if (curr < 0) curr = 0;
         }
         return mx;
     }
 };
+
+// class Solution {
+// public:
+//     int maxSubArray(vector<int>& nums) {
+//         int mx = INT_MIN;
+//         int sum = 0;
+//         for (auto num : nums) {
+//             sum += num;
+//             mx = max(sum, mx);
+//             if (sum < 0) sum = 0;
+//         }
+//         return mx;
+//     }
+// };
 
 // class Solution {
 // public:
