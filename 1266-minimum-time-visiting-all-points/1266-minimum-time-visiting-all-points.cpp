@@ -5,9 +5,7 @@ public:
         if (n == 1) return time;
         for (int i = 0; i < n-1; i++) {
             int cx = points[i][0], cy = points[i][1], nx = points[i+1][0], ny = points[i+1][1];
-            int m = min(abs(cx-nx), abs(cy-ny));
-            time += m;
-            time += abs(cx-nx) + abs(cy-ny) - 2*m;
+            time += max(abs(cx-nx), abs(cy-ny));
         }
         return time;
     }
