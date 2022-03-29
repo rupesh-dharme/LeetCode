@@ -14,8 +14,6 @@ public:
             fast = nums[fast];
         }
         return slow;
-        // cout << slow << " " << fast << endl;
-        // return nums[nums[slow]];
     }
 };
 
