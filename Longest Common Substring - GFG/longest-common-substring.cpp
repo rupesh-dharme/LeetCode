@@ -7,8 +7,8 @@ class Solution{
     public:
     int longestCommonSubstr (string s1, string s2, int n, int m)
     {
-        int dp[n+1][m+1], mx = 0;
-        memset(dp, 0, sizeof(dp));
+        vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
+        int mx = 0;
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
                 if (s1[i-1] == s2[j-1]) {
@@ -19,6 +19,24 @@ class Solution{
             }
         }
         return mx;
+        // int dp[n+1][m+1], mx = 0;
+        // memset(dp, 0, sizeof(dp));
+        // for (int i = 1; i <= n; i++) {
+        //     for (int j = 1; j <= m; j++) {
+        //         if (s1[i-1] == s2[j-1]) {
+        //             dp[i][j] = dp[i-1][j-1] + 1;
+        //             mx = max(mx, dp[i][j]);
+        //         }
+        //         else dp[i][j] = 0;
+        //     }
+        // }
+        // for (int i = 0; i <= n; i++) {
+        //     for (int j = 0; j <= m; j++) {
+        //         cout << dp[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
+        // return mx;
         // vector<vector<int>> dp(n+1, vector<int> (m+1, -1)); CODE FOR SUBSEQUENCE 
         // int dp[n+1][m+1];
         // memset(dp, 0, sizeof(dp));
