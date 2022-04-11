@@ -9,7 +9,7 @@ public:
     
     void visit(string url) {
         history.push(curr);
-        while (future.size()) future.pop();
+        future = stack<string> ();
         curr = url;
     }
     
