@@ -20,6 +20,7 @@ public:
     
     void recurse(TreeNode* root, int mx) {
         if (!root) return;
+        
         if (mx <= root->val) count++;
         mx = max(mx, root->val);
         
