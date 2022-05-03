@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> minSubsequence(vector<int>& nums) {
+    vector<int> minSubsequence(vector<int>& nums) { // O(nlog(n)) 
         sort(nums.rbegin(), nums.rend());
         vector<int> result;
         int sum = 0, total = accumulate(nums.begin(), nums.end(), 0), n = nums.size();
