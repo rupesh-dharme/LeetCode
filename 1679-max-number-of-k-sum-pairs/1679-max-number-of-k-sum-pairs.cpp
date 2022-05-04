@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
-        int count = 0, n = nums.size();
+        int count = 0;
         unordered_map<int, int> um;
         for (auto num : nums) {
             if (um.find(k - num) != um.end() && um[k - num] > 0) {
