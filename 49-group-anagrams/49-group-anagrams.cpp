@@ -7,8 +7,7 @@ public:
             for (auto ch : str) freq[ch - 'a']++;
             string key;
             for (int i = 0; i < 26; i++) {
-                key += '_';
-                key += to_string(freq[i]);
+                key += (to_string(freq[i]) + '#');
             }
             if (mp.count(key)) mp[key].push_back(str);
             else mp[key] = {str};
