@@ -15,7 +15,6 @@ public:
         vector<vector<int>> res;
         for (int i = 0; i < k; i++) {
             res.push_back(pq.top());
-            cout << pq.top()[0] << " " << pq.top()[1] << endl;
             pq.pop();
         }
         return res;
