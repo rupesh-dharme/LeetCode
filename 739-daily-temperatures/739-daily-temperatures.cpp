@@ -7,7 +7,8 @@ public:
         stk.push({temp[0], 0});
         for (int i = 1; i < n; i++) {
             while (stk.size() && stk.top().first < temp[i]) {
-                result[stk.top().second] = i - stk.top().second;
+                int ind = stk.top().second;
+                result[ind] = i - ind;
                 stk.pop();
             }
             stk.push({temp[i], i});
