@@ -15,13 +15,15 @@ public:
         if (!root) return 0;
         queue<TreeNode *> q;
         q.push(root);
-        while(true) {
-            int n = q.size(), curr = 0;
+        int curr = 0;
+        while(q.size()) {
+            int n = q.size();
+            curr = 0;
             bool over = true;
             for (int i = 0; i < n; i++) {
                 TreeNode* node = q.front();
                 q.pop();
-                if (node) {
+                // if (node) {
                     curr += node->val;
                     if (node->left) {
                         over = false;
@@ -31,9 +33,10 @@ public:
                         over = false;
                         q.push(node->right);
                     }
-                }
+                // }
             }
-            if (over) return curr;
+            // if (over) return curr;
         }
+        return curr;
     }
 };
