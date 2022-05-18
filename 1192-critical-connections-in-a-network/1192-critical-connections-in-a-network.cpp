@@ -29,50 +29,9 @@ public:
         
         vector<int> disc(n, -1), low(n, -1), parent(n, -1);
         dfs(0, disc, low, parent);
-        // for (int i = 0; i < n; i++) {
-        //     if (disc[i] == -1) {
-        //         dfs(i, disc, low, parent);
-        //     }
-        // }
         return bridges;
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // class Solution {
