@@ -37,6 +37,22 @@ class Solution
             stack.push(arr[i]);
         }
         return result;
+        
+        
+        // vector<long long> result(n, -1); // nearest greater element to the left
+        // stack<int> stack;
+        // for (int i = 0; i < n; i++) {
+        //     if (!stack.size()) {}
+        //     else if (stack.top() > arr[i]) result[i] = stack.top();
+        //     else if (stack.top() <= arr[i]) {
+        //         while (stack.size() && stack.top() <= arr[i]) stack.pop();
+        //         if (stack.size()) {
+        //             result[i] = stack.top();
+        //         }
+        //     }
+        //     stack.push(arr[i]);
+        // }
+        // return result;
     }
 };
 
