@@ -1,6 +1,5 @@
 class Solution {
 private:
-    int mx = 0, count = 0;
     vector<vector<vector<int>>> dp;
 public:
     int findMaxForm(vector<string>& strs, int m, int n) {
@@ -9,21 +8,17 @@ public:
     }
     
     int recurse(vector<string> &strs, int i, int m, int n) {
-        if (m < 0 || n < 0) return 0;
+        if (m < 0 || n < 0 || i == strs.size()) return 0;
         if (m == 0 && n == 0) return  0;
-        if (i == strs.size()) {
-            mx = max(mx, count);
-            return 0;
-        }
+        
         if (dp[i][m][n] != -1) return dp[i][m][n];
-        int l = recurse(strs, i+1, m, n), r = 0;
+        
+        int skip = recurse(strs, i+1, m, n), consider = 0;
+        
         int os = 0, zs = 0;
         for (auto ch : strs[i]) ch == '1' ? os++ : zs++;
-        if (zs <= m && os <= n) {
-            count++;
-            r = 1 + recurse(strs, i + 1, m - zs, n - os);
-            count--;
-        }
-        return dp[i][m][n] = max(l, r);
+        
+        if (zs <= m && os <= n) consider = 1 + recurse(strs, i + 1, m - zs, n - os);
+        return dp[i][m][n] = max(skip, consider);
     }
 };
