@@ -3,31 +3,66 @@
 using namespace std;
 
  // } Driver Code Ends
-class Solution {
+
+
+class Solution {// BFS solution
   public:
-    bool dfs(int u, int par, vector<int> adj[], vector<bool> &vis) {
+    bool bfs(int u, vector<int> adj[], vector<int> &vis) {
+        queue<pair<int, int>> q;
+        q.push({u, -1});
         vis[u] = true;
         
-        for (auto v : adj[u]) {
-            if (!vis[v]) {
-                if (dfs(v, u, adj, vis)) return true;
-            } else if (v != par) return true;
+        while (q.size()) {
+            int u = q.front().first;
+            int par = q.front().second;
+            q.pop();
+            
+            for (auto v : adj[u]) {
+                if (!vis[v]) {
+                    vis[v] = true;
+                    q.push({v, u});
+                } else if (v != par) return true;
+            }
         }
-        
         return false;
     }
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
-        vector<bool> vis(V, false);
-        
+        vector<int> vis(V, false);
         for (int i = 0; i < V; i++) {
-            if (!vis[i]) if (dfs(i, -1, adj, vis)) return true;
+            if (!vis[i]) if (bfs(i, adj, vis)) return true;
         }
-        
         return false;
     }
 };
+
+
+// class Solution {// DFS solution
+//   public:
+//     bool dfs(int u, int par, vector<int> adj[], vector<bool> &vis) {
+//         vis[u] = true;
+        
+//         for (auto v : adj[u]) {
+//             if (!vis[v]) {
+//                 if (dfs(v, u, adj, vis)) return true;
+//             } else if (v != par) return true;
+//         }
+        
+//         return false;
+//     }
+//     // Function to detect cycle in an undirected graph.
+//     bool isCycle(int V, vector<int> adj[]) {
+//         // Code here
+//         vector<bool> vis(V, false);
+        
+//         for (int i = 0; i < V; i++) {
+//             if (!vis[i]) if (dfs(i, -1, adj, vis)) return true;
+//         }
+        
+//         return false;
+//     }
+// };
 
 
 
