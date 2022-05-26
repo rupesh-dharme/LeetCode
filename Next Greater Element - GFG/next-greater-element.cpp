@@ -23,20 +23,37 @@ class Solution
     
     vector<long long> nextLargerElement(vector<long long> arr, int n){
         stack<long long> stack;
-        vector<long long> result(n, -1);
+        vector<long long> res(n);
         for (int i = n-1; i >= 0; --i) {
-            if (!stack.size()) {}
-            else if (stack.top() > arr[i]) result[i] = stack.top();
+            if (stack.empty()) res[i] = -1;
+            else if (stack.top() > arr[i]) res[i] = stack.top();
             else if (stack.top() <= arr[i]) {
-                while (stack.size() && stack.top() <= arr[i]) {
-                    stack.pop();
-                }
-                if (!stack.size()) {}
-                else result[i] = stack.top();
+                while (stack.size() && stack.top() <= arr[i]) stack.pop();
+                if (stack.size()) res[i] = stack.top();
+                else res[i] = -1;
             }
             stack.push(arr[i]);
         }
-        return result;
+        return res;
+    }
+    
+    // vector<long long> nextLargerElement(vector<long long> arr, int n){
+    //     stack<long long> stack;
+    //     vector<long long> result(n, -1);
+    //     for (int i = n-1; i >= 0; --i) {
+    //         if (!stack.size()) {}
+    //         else if (stack.top() > arr[i]) result[i] = stack.top();
+    //         else if (stack.top() <= arr[i]) {
+    //             while (stack.size() && stack.top() <= arr[i]) {
+    //                 stack.pop();
+    //             }
+    //             if (!stack.size()) {}
+    //             else result[i] = stack.top();
+    //         }
+    //         stack.push(arr[i]);
+    //     }
+    //     return result;
+    // }
         
         
         // vector<long long> result(n, -1); // nearest greater element to the left
@@ -53,7 +70,7 @@ class Solution
         //     stack.push(arr[i]);
         // }
         // return result;
-    }
+    // }
 };
 
 
