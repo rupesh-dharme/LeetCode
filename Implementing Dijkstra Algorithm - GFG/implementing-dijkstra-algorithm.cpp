@@ -3,38 +3,6 @@
 using namespace std;
 
  // } Driver Code Ends
-// class Solution
-// {
-// 	public:
-// 	//Function to find the shortest distance of all the vertices
-//     //from the source vertex S.
-//     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
-//     {
-//         // Code here
-//         bool vis[V] = {false};
-//         vector<int> distTo(V, INT_MAX);
-//         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-//         distTo[S] = 0;
-//         pq.push({0, S});
-        
-//         while (!pq.empty()) {
-//             int dist = pq.top().first, node = pq.top().second; 
-//             pq.pop();
-//             vis[node] = true;
-            
-//             for (auto v : adj[node]) {
-//                 int nxt = v[0], wt = v[1];
-//                 if (dist + wt < distTo[nxt]) {
-//                     distTo[nxt] = dist + wt;
-//                     pq.push({distTo[nxt], nxt});
-//                 }
-//             }
-//         }
-        
-//         return distTo;
-//     }
-// };
-
 class Solution
 {
 	public:
@@ -42,26 +10,59 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
+        // Code here
+        // bool vis[V] = {false};
         vector<int> distTo(V, INT_MAX);
+        using pii = pair<int, int>;
+        priority_queue<pii, vector<pii>, greater<pii>> pq;
         distTo[S] = 0;
-        queue<pair<int, int>> q;
-        q.push({S, 0});
-        while (!q.empty()) {
-            auto node = q.front().first;
-            auto dist = q.front().second;
-            q.pop();
-            for (auto next : adj[node]) {
-                auto nextNode = next[0];
-                auto nextDist = next[1];
-                if (distTo[nextNode] > dist + nextDist) {
-                    distTo[nextNode] = dist + nextDist;
-                    q.push({nextNode, distTo[nextNode]});
+        pq.push({0, S});
+        
+        while (!pq.empty()) {
+            int dist = pq.top().first, node = pq.top().second; 
+            pq.pop();
+            // vis[node] = true;
+            
+            for (auto v : adj[node]) {
+                int nxt = v[0], wt = v[1];
+                if (dist + wt < distTo[nxt]) {
+                    distTo[nxt] = dist + wt;
+                    pq.push({distTo[nxt], nxt});
                 }
             }
         }
+        
         return distTo;
     }
 };
+
+// class Solution
+// {
+// 	public:
+// 	//Function to find the shortest distance of all the vertices
+//     //from the source vertex S.
+//     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+//     {
+//         vector<int> distTo(V, INT_MAX);
+//         distTo[S] = 0;
+//         queue<pair<int, int>> q;
+//         q.push({S, 0});
+//         while (!q.empty()) {
+//             auto node = q.front().first;
+//             auto dist = q.front().second;
+//             q.pop();
+//             for (auto next : adj[node]) {
+//                 auto nextNode = next[0];
+//                 auto nextDist = next[1];
+//                 if (distTo[nextNode] > dist + nextDist) {
+//                     distTo[nextNode] = dist + nextDist;
+//                     q.push({nextNode, distTo[nextNode]});
+//                 }
+//             }
+//         }
+//         return distTo;
+//     }
+// };
 
 // { Driver Code Starts.
 
