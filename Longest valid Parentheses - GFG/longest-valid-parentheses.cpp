@@ -10,17 +10,15 @@ using namespace std;
 class Solution{
 public:
     int maxLength(string S){
-        int n = S.size(), mx = 0;
-        stack<int> stack;
-        stack.push(-1);
+        int mx = 0, n = S.size();
+        stack<int> stk;
+        stk.push(-1);
         for (int i = 0; i < n; i++) {
-            if (S[i] == '(') stack.push(i);
+            if (S[i] == '(') stk.push(i);
             else {
-                stack.pop();
-                if (stack.size()) {
-                    mx = max(mx, i - stack.top());
-                }
-                else stack.push(i);
+                stk.pop();
+                if (stk.size()) mx = max(mx, i - stk.top());
+                else stk.push(i);
             }
         }
         return mx;
