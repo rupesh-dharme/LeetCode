@@ -5,39 +5,91 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
+    bool dfs(int u, int par, vector<int> adj[], vector<bool> &vis) {
+        vis[u] = true;
+        
+        for (auto v : adj[u]) {
+            if (!vis[v]) {
+                if (dfs(v, u, adj, vis)) return true;
+            } else if (v != par) return true;
+        }
+        
+        return false;
+    }
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
-        vector<int> visited(V, 0);
-        for (int i = 0; i < V; i++) {
-            if (!visited[i]) {
-                if (detectCycle(adj, i, visited)) return true;
-            }
-        }
-        return false;
-    }
-    
-    bool detectCycle(vector<int> adj[], int node, vector<int> &visited) {
-        queue<pair<int, int>> q;
-        q.push({node, -1});
-        visited[node] = 1;
+        vector<bool> vis(V, false);
         
-        while (q.size()) {
-            int curr = q.front().first;
-            int prev = q.front().second;
-            q.pop();
-            for (auto nxt : adj[curr]) {
-                if (!visited[nxt]) {
-                    visited[nxt] = 1;
-                    q.push({nxt, curr});
-                } else {
-                    if (prev != nxt) return true;
-                }
-            }
+        for (int i = 0; i < V; i++) {
+            if (!vis[i]) if (dfs(i, -1, adj, vis)) return true;
         }
+        
         return false;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class Solution {
+//   public:
+//     // Function to detect cycle in an undirected graph.
+//     bool isCycle(int V, vector<int> adj[]) {
+//         // Code here
+//         vector<int> visited(V, 0);
+//         for (int i = 0; i < V; i++) {
+//             if (!visited[i]) {
+//                 if (detectCycle(adj, i, visited)) return true;
+//             }
+//         }
+//         return false;
+//     }
+    
+//     bool detectCycle(vector<int> adj[], int node, vector<int> &visited) {
+//         queue<pair<int, int>> q;
+//         q.push({node, -1});
+//         visited[node] = 1;
+        
+//         while (q.size()) {
+//             int curr = q.front().first;
+//             int prev = q.front().second;
+//             q.pop();
+//             for (auto nxt : adj[curr]) {
+//                 if (!visited[nxt]) {
+//                     visited[nxt] = 1;
+//                     q.push({nxt, curr});
+//                 } else {
+//                     if (prev != nxt) return true;
+//                 }
+//             }
+//         }
+//         return false;
+//     }
+// };
 
 // { Driver Code Starts.
 int main() {
