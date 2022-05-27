@@ -10,42 +10,39 @@ class Solution
     private:
     int count = 0;
 	public:
-	
-	void dfs(int node, vector<int> adj[], vector<int> &vis) {
-	    vis[node] = 1;
-	    for (auto v : adj[node]) {
-	        if (!vis[v]) dfs(v, adj, vis);
-	    }
+	void dfs(int u, vector<bool> &vis, vector<int> adj[]) {
+	    vis[u] = true;
+	    for (auto v : adj[u]) if (!vis[v]) dfs(v, vis, adj);
 	}
-	void toposort(int node, vector<int> adj[], stack<int> &topo, vector<int> &vis) {
-	    vis[node] = 1;
-	    for (auto v : adj[node]) {
-	        if (!vis[v]) toposort(v, adj, topo, vis);
+	void toposort(int u, vector<bool> &vis, stack<int> &topo, vector<int> adj[]) {
+	    vis[u] = true;
+	    for (auto v : adj[u]) {
+	        if (!vis[v]) toposort(v, vis, topo, adj);
 	    }
-	    topo.push(node);
+	    topo.push(u);
 	}
 	//Function to find number of strongly connected components in the graph.
     int kosaraju(int V, vector<int> adj[])
     {
+        //code here
         stack<int> topo;
-        vector<int> vis(V, 0);
+        vector<bool> vis(V, false);
         for (int i = 0; i < V; i++) {
-            if (!vis[i]) toposort(i, adj, topo, vis);
+            if (!vis[i]) toposort(i, vis, topo, adj);
         }
         
         vector<int> trans[V];
         
         for (int i = 0; i < V; i++) {
-            vis[i] = 0;
+            vis[i] = false;
             for (auto v : adj[i]) trans[v].push_back(i);
         }
         
         while (topo.size()) {
-            int node = topo.top();
-            topo.pop();
-            if (!vis[node]) {
+            int u = topo.top(); topo.pop();
+            if (!vis[u]) {
                 count++;
-                dfs(node, trans, vis);
+                dfs(u, vis, trans);
             }
         }
         
