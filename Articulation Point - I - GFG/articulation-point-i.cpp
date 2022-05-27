@@ -9,33 +9,39 @@ using namespace std;
 
 class Solution {
   public:
-    void dfs(int u, vector<int> &disc, vector<int> &low, vector<int> &parent, vector<bool> &ap, vector<int> adj[]) {
+    void dfs(int u, vector<int> &disc, vector<int> &low, vector<int> &parent, vector<int> adj[], vector<bool> &ap) {
         static int time = 0;
-        disc[u] = low[u] = time;
-        time++;
-        int children = 0;
+        disc[u] = low[u] = time++;
+        int child = 0;
         
         for (auto v : adj[u]) {
             if (disc[v] == -1) {
                 parent[v] = u;
-                children++;
-                dfs(v, disc, low, parent, ap, adj);
-                low[u] = min(low[u], low[v]);
-                if (parent[u] == -1 && children > 1) ap[u] = true;
+                child++;
+                dfs(v, disc, low, parent, adj, ap);
+                
+                low[u] = min(low[v], low[u]);
+                
+                if (parent[u] == -1 && child > 1) ap[u] = true;
                 if (parent[u] != -1 && low[v] >= disc[u]) ap[u] = true;
-            } else if (parent[u] != v) {
+            }
+            else if (parent[u] != v) {
                 low[u] = min(low[u], disc[v]);
             }
         }
     }
+    
     vector<int> articulationPoints(int V, vector<int>adj[]) {
-        vector<int> disc(V, -1), low(V, -1), parent(V, -1);
+        // Code here
         vector<bool> ap(V, false);
-        dfs(0, disc, low, parent, ap, adj);
-        vector<int> res;
-        for (int i = 0; i < V; i++) if (ap[i]) res.push_back(i);
-        if (res.size() == 0) res.push_back(-1);
-        return res;
+        vector<int> disc(V, -1), low(V, -1), parent(V, -1);
+        for (int i = 0; i < V; i++) {
+            if (disc[i] == -1) dfs(i, disc, low, parent, adj, ap);
+        }
+        vector<int> points;
+        for (int i = 0; i < V; i++) if (ap[i]) points.push_back(i);
+        if (points.size() == 0) points.push_back(-1);
+        return points;
     }
 };
 
