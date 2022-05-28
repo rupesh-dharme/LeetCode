@@ -100,11 +100,10 @@ class Solution{
     vector<int> preOrder(Node* root)
     {
         //code here
-        if (!root) return {};
         vector<int> preorder;
-        stack<Node*> stk;
+        stack<Node *> stk;
         stk.push(root);
-        while (!stk.empty()) {
+        while (stk.size()) {
             root = stk.top(); stk.pop();
             preorder.push_back(root->data);
             if (root->right) stk.push(root->right);
