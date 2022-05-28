@@ -98,11 +98,11 @@ class Solution {
 public:
     vector<int> inOrder(Node* root)
     {
+        //code here
         vector<int> inorder;
-        if (!root) return inorder;
-        stack<Node*> stk;
-        while (root || !stk.empty()) {
-            while(root) {
+        stack<Node *> stk;
+        while (root || stk.size()) {
+            while (root) {
                 stk.push(root);
                 root = root->left;
             }
