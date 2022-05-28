@@ -40,45 +40,42 @@ int main()
 }
 // } Driver Code Ends
 
+
 /* The functions which 
 builds the segment tree */
+int seg[4005] = {0};
 
-int seg[100000];
-
-void build(int node, int arr[], int l, int r) {
-    if (l == r) {
-        seg[node] = arr[l];
+void build(int node, int low, int high, int arr[]) {
+    if (low == high) {
+        seg[node] = arr[low];
         return;
     }
-    int m = l + (r - l)/2;
-    build(node*2 + 1, arr, l, m);
-    build(node*2 + 2, arr, m + 1, r);
+    int m = low + (high - low)/2;
+    build(node*2 + 1, low, m, arr);
+    build(node*2 + 2, m + 1, high, arr);
     seg[node] = min(seg[node*2 + 1], seg[node*2 + 2]);
 }
 
 int *constructST(int arr[],int n)
 {
-//   memset(seg, INT_MAX, sizeof(seg));
-  build(0, arr, 0, n-1);
-//   for (int i = 0; i < 10; i++) cout << seg[i] << " ";
+  //Your code here
+  build(0, 0, n-1, arr);
   return seg;
 }
 
-int query(int node, int low, int high, int l, int r) {
-    if (low >= l && high <= r) return seg[node];
-    if (l > high || r < low) return INT_MAX;
-    int mid = (low + high) / 2;
-    int left = query(node*2 + 1, low, mid, l, r);
-    int right = query(node*2 + 2, mid + 1, high, l, r);
+int minimum(int node, int low, int high, int l, int r, int seg[]) {
+    if (low >= l && r >= high) return seg[node];
+    if (low > r || high < l) return INT_MAX;
+    int m = low + (high - low) / 2;
+    int left = minimum(node*2 + 1, low, m, l, r, seg);
+    int right = minimum(node*2 + 2, m + 1, high, l, r, seg);
     return min(left, right);
 }
-
 /* The functions returns the
  min element in the range
  from a and b */
-int RMQ(int st[], int n, int l, int r)
+int RMQ(int st[] , int n, int a, int b)
 {
-    //Your code here
-    return query(0, 0, n - 1, l, r);
+//Your code here
+    return minimum(0, 0, n-1, a, b, st);
 }
-
