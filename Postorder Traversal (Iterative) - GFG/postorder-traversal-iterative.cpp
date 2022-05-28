@@ -97,21 +97,20 @@ struct Node {
 class Solution{
     public:
     vector<int> postOrder(Node* node) {
-        vector<int> postorder;
-        if (!node) return postorder;
-        stack<Node*> stk1, stk2;
+        // code here
+        vector<int> post;
+        stack<Node *> stk1;
         stk1.push(node);
-        while(!stk1.empty()) {
-            Node* node = stk1.top(); stk1.pop();
-            stk2.push(node);
-            if(node->left) stk1.push(node->left);
-            if(node->right) stk1.push(node->right);
+        
+        while(stk1.size()) {
+            node = stk1.top(); stk1.pop();
+            post.push_back(node->data);
+            if (node->left) stk1.push(node->left);
+            if (node->right) stk1.push(node->right);
         }
-        while(!stk2.empty()) {
-            postorder.push_back(stk2.top()->data);
-            stk2.pop();
-        }
-        return postorder;
+        
+        reverse(post.begin(), post.end());
+        return post;
     }
 };
 
