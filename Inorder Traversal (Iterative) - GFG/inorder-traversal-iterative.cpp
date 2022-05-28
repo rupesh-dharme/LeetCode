@@ -96,21 +96,31 @@ struct Node {
 };*/
 class Solution {
 public:
-    vector<int> inOrder(Node* root)
+    vector<int> inOrder(Node* root) // Morris traversal
     {
         //code here
-        vector<int> inorder;
-        stack<Node *> stk;
-        while (root || stk.size()) {
-            while (root) {
-                stk.push(root);
-                root = root->left;
+        vector<int> in;
+        while (root) {
+            if (!root->left) {
+                in.push_back(root->data);
+                root = root->right;
             }
-            root = stk.top(); stk.pop();
-            inorder.push_back(root->data);
-            root = root->right;
+            else {
+                Node *prev = root->left;
+                while (prev->right != NULL && prev->right != root) {
+                    prev = prev->right;
+                }
+                if (prev->right) {
+                    prev->right = NULL;
+                    in.push_back(root->data);
+                    root = root->right;
+                } else {
+                    prev->right = root;
+                    root = root->left;
+                }
+            }
         }
-        return inorder;
+        return in;
     }
 };
 
