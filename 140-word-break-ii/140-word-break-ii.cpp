@@ -34,7 +34,7 @@ public:
         }
         node->setEnd();
     }
-    void addSent(unordered_set<string> &res, string &s, string str, int i, Node *node) {
+    void addSent(vector<string> &res, string &s, string str, int i, Node *node) {
         for (; i < s.size(); i++) {
             if (!node->contains(s[i])) return;
             str += s[i];
@@ -44,7 +44,7 @@ public:
             }
         }
         if (str.back() == ' ') str.pop_back();
-        if (node->isEnd()) res.insert(str);
+        if (node->isEnd()) res.push_back(str);
     }
 };
 
@@ -53,10 +53,8 @@ public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
         Trie t;
         for (auto word : wordDict) t.insert(word);
-        unordered_set<string> st;
-        t.addSent(st, s, "", 0, t.root);
         vector<string> res;
-        for (auto str : st) res.push_back(str);
+        t.addSent(res, s, "", 0, t.root);
         return res;
     }
 };
