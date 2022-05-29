@@ -99,16 +99,14 @@ class Solution{
     vector<int> postOrder(Node* node) {
         // code here
         vector<int> post;
-        stack<Node *> stk1;
-        stk1.push(node);
-        
-        while(stk1.size()) {
-            node = stk1.top(); stk1.pop();
+        stack<Node *> stk;
+        stk.push(node);
+        while (stk.size()) {
+            node = stk.top(); stk.pop();
             post.push_back(node->data);
-            if (node->left) stk1.push(node->left);
-            if (node->right) stk1.push(node->right);
+            if (node->left) stk.push(node->left);
+            if (node->right) stk.push(node->right);
         }
-        
         reverse(post.begin(), post.end());
         return post;
     }
