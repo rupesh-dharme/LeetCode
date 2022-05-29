@@ -101,16 +101,40 @@ class Solution{
     {
         //code here
         vector<int> pre;
-        stack<Node *> stk;
-        stk.push(root);
-        while (stk.size()) {
-            root = stk.top(); stk.pop();
-            pre.push_back(root->data);
-            if (root->right) stk.push(root->right);
-            if (root->left) stk.push(root->left);
+        while (root) {
+            if (!root->left) {
+                pre.push_back(root->data);
+                root = root->right;
+            }
+            else {
+                Node *prev = root->left;
+                while (prev->right != NULL && prev->right != root) prev = prev->right;
+                if (prev->right) {
+                    prev->right = NULL;
+                    root = root->right;
+                } else {
+                    prev->right = root;
+                    pre.push_back(root->data);
+                    root = root->left;
+                }
+            }
         }
         return pre;
     }
+    // vector<int> preOrder(Node* root)
+    // {
+    //     //code here
+    //     vector<int> pre;
+    //     stack<Node *> stk;
+    //     stk.push(root);
+    //     while (stk.size()) {
+    //         root = stk.top(); stk.pop();
+    //         pre.push_back(root->data);
+    //         if (root->right) stk.push(root->right);
+    //         if (root->left) stk.push(root->left);
+    //     }
+    //     return pre;
+    // }
 };
 
 // { Driver Code Starts.
