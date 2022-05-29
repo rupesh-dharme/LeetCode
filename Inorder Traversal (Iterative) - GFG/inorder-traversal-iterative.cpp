@@ -96,7 +96,7 @@ struct Node {
 };*/
 class Solution {
 public:
-    vector<int> inOrder(Node* root) // Morris traversal
+    vector<int> inOrder(Node* root)
     {
         //code here
         vector<int> in;
@@ -114,7 +114,8 @@ public:
                     prev->right = NULL;
                     in.push_back(root->data);
                     root = root->right;
-                } else {
+                }
+                else {
                     prev->right = root;
                     root = root->left;
                 }
