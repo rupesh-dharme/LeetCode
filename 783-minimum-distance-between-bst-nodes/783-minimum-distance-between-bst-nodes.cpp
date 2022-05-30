@@ -11,43 +11,43 @@
  */
 class Solution {
 public:
-    // int minDiffInBST(TreeNode* root) {
-    //     int mn = INT_MAX, pnode = -1;
-    //     while (root) {
-    //         if (!root->left) {
-    //             if (pnode >= 0) mn = min(mn, root->val - pnode);
-    //             pnode = root->val;
-    //             root = root->right;
-    //         }
-    //         else {
-    //             TreeNode *prev = root->left;
-    //             while (prev->right != NULL && prev->right != root) prev = prev->right;
-    //             if (!prev->right) {
-    //                 prev->right = root;
-    //                 root = root->left;
-    //             }
-    //             else {
-    //                 prev->right = NULL;
-    //                 if (pnode >= 0) mn = min(mn, root->val - pnode);
-    //                 pnode = root->val;
-    //                 root = root->right;
-    //             }
-    //         }
-    //     }
-    //     return mn;
-    // }
-    
-    int minDiffInBST(TreeNode* root) {
-        int prev = -1, mn = INT_MAX;
-        recurse(root, prev, mn);
+    int minDiffInBST(TreeNode* root) { // morris traversal
+        int mn = INT_MAX, pnode = -1;
+        while (root) {
+            if (!root->left) {
+                if (pnode >= 0) mn = min(mn, root->val - pnode);
+                pnode = root->val;
+                root = root->right;
+            }
+            else {
+                TreeNode *prev = root->left;
+                while (prev->right != NULL && prev->right != root) prev = prev->right;
+                if (!prev->right) {
+                    prev->right = root;
+                    root = root->left;
+                }
+                else {
+                    prev->right = NULL;
+                    if (pnode >= 0) mn = min(mn, root->val - pnode);
+                    pnode = root->val;
+                    root = root->right;
+                }
+            }
+        }
         return mn;
     }
     
-    void recurse(TreeNode *root, int &prev, int &mn) {
-        if (!root) return;
-        recurse(root->left, prev, mn);
-        if (prev >= 0) mn = min(mn, root->val - prev);
-        prev = root->val;
-        recurse(root->right, prev, mn);
-    }
+//     int minDiffInBST(TreeNode* root) { //recursive
+//         int prev = -1, mn = INT_MAX;
+//         recurse(root, prev, mn);
+//         return mn;
+//     }
+    
+//     void recurse(TreeNode *root, int &prev, int &mn) {
+//         if (!root) return;
+//         recurse(root->left, prev, mn);
+//         if (prev >= 0) mn = min(mn, root->val - prev);
+//         prev = root->val;
+//         recurse(root->right, prev, mn);
+//     }
 };
