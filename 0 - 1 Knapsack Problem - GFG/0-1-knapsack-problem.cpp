@@ -4,6 +4,7 @@ using namespace std;
 
 
  // } Driver Code Ends
+
 class Solution
 {
     public:
@@ -11,7 +12,8 @@ class Solution
     int knapSack(int W, int wt[], int val[], int N)
     { 
        int dp[N+1][W+1];
-       memset(dp, 0, sizeof(dp));
+       memset(dp, 0, sizeof dp);
+       
        for (int i = 1; i <= N; i++) {
            for (int j = 1; j <= W; j++) {
                if (wt[i-1] <= j) {
@@ -21,10 +23,10 @@ class Solution
                }
            }
        }
+       
        return dp[N][W];
     }
 };
-
 
 
 
