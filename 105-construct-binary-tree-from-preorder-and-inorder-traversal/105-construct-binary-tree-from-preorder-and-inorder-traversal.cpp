@@ -12,7 +12,7 @@
 class Solution {
 public:
     TreeNode *build(vector<int> &pre, vector<int> &in, int ps, int pe, int is, int ie, unordered_map<int, int> &inmap) {
-        if (ps > pe || is > ie) return NULL;
+        if (ps > pe) return NULL;
         TreeNode *root = new TreeNode(pre[ps]);
         
         int idx = inmap[pre[ps]];
