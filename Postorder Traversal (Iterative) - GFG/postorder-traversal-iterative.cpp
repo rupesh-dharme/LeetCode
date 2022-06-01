@@ -100,16 +100,31 @@ class Solution{
         // code here
         vector<int> post;
         stack<Node *> stk;
+        Node *root;
         stk.push(node);
         while (stk.size()) {
-            node = stk.top(); stk.pop();
-            post.push_back(node->data);
-            if (node->left) stk.push(node->left);
-            if (node->right) stk.push(node->right);
+            root = stk.top(); stk.pop();
+            post.push_back(root->data);
+            if (root->left) stk.push(root->left);
+            if (root->right) stk.push(root->right);
         }
         reverse(post.begin(), post.end());
         return post;
     }
+    // vector<int> postOrder(Node* node) {
+    //     // code here
+    //     vector<int> post;
+    //     stack<Node *> stk;
+    //     stk.push(node);
+    //     while (stk.size()) {
+    //         node = stk.top(); stk.pop();
+    //         post.push_back(node->data);
+    //         if (node->left) stk.push(node->left);
+    //         if (node->right) stk.push(node->right);
+    //     }
+    //     reverse(post.begin(), post.end());
+    //     return post;
+    // }
 };
 
 // { Driver Code Starts.
