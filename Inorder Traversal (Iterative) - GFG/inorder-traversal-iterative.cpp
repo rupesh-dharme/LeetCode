@@ -100,7 +100,7 @@ public:
     {
         //code here
         vector<int> in;
-        stack<Node *> stk;
+        stack<Node *>stk;
         while (root || stk.size()) {
             while (root) {
                 stk.push(root);
@@ -112,6 +112,23 @@ public:
         }
         return in;
     }
+    
+    // vector<int> inOrder(Node* root)
+    // {
+    //     //code here
+    //     vector<int> in;
+    //     stack<Node *> stk;
+    //     while (root || stk.size()) {
+    //         while (root) {
+    //             stk.push(root);
+    //             root = root->left;
+    //         }
+    //         root = stk.top(); stk.pop();
+    //         in.push_back(root->data);
+    //         root = root->right;
+    //     }
+    //     return in;
+    // }
     
     // vector<int> inOrder(Node* root)
     // {
