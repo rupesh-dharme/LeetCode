@@ -9,20 +9,38 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
     TreeNode* bstFromPreorder(vector<int>& preorder) {
         int i = 0;
-        return create(preorder, i, INT_MAX);
+        TreeNode *root = construct(preorder, i, INT_MAX);
+        return root;
     }
-    TreeNode* create(vector<int>& pre, int & i, int upper) {
-        if (i >= pre.size() || pre[i] > upper) return nullptr;
-        TreeNode* root = new TreeNode(pre[i++]);
-        root->left = create(pre, i, root->val);
-        root->right = create(pre, i, upper);
+    
+    TreeNode *construct(vector<int> &pre, int &i, int upper) {
+        if (i >= pre.size() || pre[i] > upper) return NULL;
+        TreeNode *root = new TreeNode(pre[i++]);
+        root->left = construct(pre, i, root->val);
+        root->right = construct(pre, i, upper);
         return root;
     }
 };
+
+// class Solution {
+// public:
+//     TreeNode* bstFromPreorder(vector<int>& preorder) {
+//         int i = 0;
+//         return create(preorder, i, INT_MAX);
+//     }
+//     TreeNode* create(vector<int>& pre, int & i, int upper) {
+//         if (i >= pre.size() || pre[i] > upper) return nullptr;
+//         TreeNode* root = new TreeNode(pre[i++]);
+//         root->left = create(pre, i, root->val);
+//         root->right = create(pre, i, upper);
+//         return root;
+//     }
+// };
 
 // class Solution {
 // public:
