@@ -26,28 +26,32 @@ public:
         int ways = 0;
         for (int k = i+1; k < j; k+=2) {
             int temp = 0;
+            int lt = solve(s, i, k-1, true);
+            int lf = solve(s, i, k-1, false);
+            int rt = solve(s, k+1, j, true);
+            int rf = solve(s, k+1, j, false);
             if (s[k] == '&') {
-                if (isTrue) temp += solve(s, i, k-1, true) * solve(s, k+1, j, true);
+                if (isTrue) temp += lt * solve(s, k+1, j, true);
                 else {
-                    temp += solve(s, i, k-1, false) * solve(s, k+1, j, false);
-                    temp += solve(s, i, k-1, true) * solve(s, k+1, j, false);
-                    temp += solve(s, i, k-1, false) * solve(s, k+1, j, true);
+                    temp += lf * rf;
+                    temp += lt * rf;
+                    temp += lf * rt;
                 }
             } else if (s[k] == '|') {
                 if (isTrue) {
-                    temp += solve(s, i, k-1, true) * solve(s, k+1, j, true);
-                    temp += solve(s, i, k-1, true) * solve(s, k+1, j, false);
-                    temp += solve(s, i, k-1, false) * solve(s, k+1, j, true);
+                    temp += lt * rt;
+                    temp += lt * rf;
+                    temp += lf * rt;
                 }
-                else temp += solve(s, i, k-1, false) * solve(s, k+1, j, false);
+                else temp += lf * rf;
             } else {
                 if (isTrue) {
-                    temp += solve(s, i, k-1, true) * solve(s, k+1, j, false);
-                    temp += solve(s, i, k-1, false) * solve(s, k+1, j, true);
+                    temp += lt * rf;
+                    temp += lf * rt;
                 }
                 else {
-                    temp += solve(s, i, k-1, true) * solve(s, k+1, j, true);
-                    temp += solve(s, i, k-1, false) * solve(s, k+1, j, false);
+                    temp += lt * rt;
+                    temp += lf * rf;
                 }
             }
             ways += temp;
