@@ -11,14 +11,27 @@ class Solution{
         int mx = 0;
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
-                if (s1[i-1] == s2[j-1]) {
-                    dp[i][j] = dp[i-1][j-1] + 1;
-                    mx = max(mx, dp[i][j]);
+                if (s1[i-1] == s2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+                else {
+                    dp[i][j] = 0;
                 }
-                else dp[i][j] = 0;
+                mx = max(mx, dp[i][j]);
             }
         }
         return mx;
+        
+        // vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
+        // int mx = 0;
+        // for (int i = 1; i <= n; i++) {
+        //     for (int j = 1; j <= m; j++) {
+        //         if (s1[i-1] == s2[j-1]) {
+        //             dp[i][j] = dp[i-1][j-1] + 1;
+        //             mx = max(mx, dp[i][j]);
+        //         }
+        //         else dp[i][j] = 0;
+        //     }
+        // }
+        // return mx;
         // int dp[n+1][m+1], mx = 0;
         // memset(dp, 0, sizeof(dp));
         // for (int i = 1; i <= n; i++) {
