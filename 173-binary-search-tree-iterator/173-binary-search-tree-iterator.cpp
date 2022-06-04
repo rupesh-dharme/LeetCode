@@ -10,15 +10,16 @@
  * };
  */
 class BSTIterator {
+private:
     stack<TreeNode *> stk;
 public:
     BSTIterator(TreeNode* root) {
-        goLeft(root);
+        pushLeft(root);
     }
     
     int next() {
-        TreeNode* node = stk.top(); stk.pop();
-        goLeft(node->right);
+        auto node = stk.top(); stk.pop();
+        pushLeft(node->right);
         return node->val;
     }
     
@@ -26,13 +27,38 @@ public:
         return !stk.empty();
     }
     
-    void goLeft(TreeNode* root) {
+    void pushLeft(TreeNode *root) {
         while (root) {
             stk.push(root);
             root = root->left;
         }
     }
 };
+
+// class BSTIterator {
+//     stack<TreeNode *> stk;
+// public:
+//     BSTIterator(TreeNode* root) {
+//         goLeft(root);
+//     }
+    
+//     int next() {
+//         TreeNode* node = stk.top(); stk.pop();
+//         goLeft(node->right);
+//         return node->val;
+//     }
+    
+//     bool hasNext() {
+//         return !stk.empty();
+//     }
+    
+//     void goLeft(TreeNode* root) {
+//         while (root) {
+//             stk.push(root);
+//             root = root->left;
+//         }
+//     }
+// };
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
