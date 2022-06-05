@@ -5,29 +5,75 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    public:
+    private:
     int dp[201][201];
+    public:
+    Solution() {
+        memset(dp, -1, sizeof dp);
+    }
     //Function to find minimum number of attempts needed in 
     //order to find the critical floor.
     int eggDrop(int n, int k) 
     {
-        memset(dp, -1, sizeof(dp));
-        int result = solve(n, k);
-        return result;
-    }
-    
-    int solve(int n, int k) {
+        // your code here
         if (n == 1) return k;
-        if (k == 1 || k == 0) return k;
+        if (k == 0 || k == 1) return k;
         if (dp[n][k] != -1) return dp[n][k];
-        int ans = INT_MAX;
+        int mn = INT_MAX;
         for (int i = 1; i <= k; i++) {
-            int temp = 1 + max(solve(n-1, i-1), solve(n, k - i));
-            ans = min(ans, temp);
+            int temp = 1 + max(eggDrop(n - 1, i - 1), eggDrop(n, k - i));
+            mn = min(mn, temp);
         }
-        return dp[n][k] = ans;
+        return dp[n][k] = mn;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class Solution
+// {
+//     public:
+//     int dp[201][201];
+//     //Function to find minimum number of attempts needed in 
+//     //order to find the critical floor.
+//     int eggDrop(int n, int k) 
+//     {
+//         memset(dp, -1, sizeof(dp));
+//         int result = solve(n, k);
+//         return result;
+//     }
+    
+//     int solve(int n, int k) {
+//         if (n == 1) return k;
+//         if (k == 1 || k == 0) return k;
+//         if (dp[n][k] != -1) return dp[n][k];
+//         int ans = INT_MAX;
+//         for (int i = 1; i <= k; i++) {
+//             int temp = 1 + max(solve(n-1, i-1), solve(n, k - i));
+//             ans = min(ans, temp);
+//         }
+//         return dp[n][k] = ans;
+//     }
+// };
 
 // { Driver Code Starts.
 int main()
