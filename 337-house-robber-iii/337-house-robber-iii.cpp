@@ -14,22 +14,19 @@ private:
     unordered_map<TreeNode *, int> um;
 public:
     int rob(TreeNode* root) {
-        return robMax(root);
-    }
-    int robMax(TreeNode *root) {
         if (!root) return 0;
         if (!root->left && !root->right) return root->val;
         if (um.count(root)) return um[root];
         int one = root->val;
         if (root->left) {
-            one += robMax(root->left->left);
-            one += robMax(root->left->right);
+            one += rob(root->left->left);
+            one += rob(root->left->right);
         }
         if (root->right) {
-            one += robMax(root->right->left);
-            one += robMax(root->right->right);
+            one += rob(root->right->left);
+            one += rob(root->right->right);
         }
-        int two = robMax(root->left) + robMax(root->right);
+        int two = rob(root->left) + rob(root->right);
         um[root] = max(one, two);
         return max(one, two);
     }
