@@ -9,10 +9,11 @@ public:
                     if (a[i] != b[j]) return false;
                     i++; j++;
                 }
+                return true;
             }
             i++; j++;
         }
-        return true;
+        return true; // will never reach here
     }
     int longestStrChain(vector<string>& words) {
         sort(words.begin(), words.end(), [](string &a, string &b) {
