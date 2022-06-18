@@ -1,21 +1,51 @@
-class MyHashMap {
+class Compare {
+private:
+    int key;
 public:
-    unordered_map<int, int> mp;
+    Compare(int k) {
+        this->key = k;
+    }
+    bool operator() (pair<int, int> &a) {
+        return a.first == key;
+    }
+};
+
+class MyHashMap {
+private:
+    int size = 1000;
+    vector<list<pair<int, int>>> map;
+public:
     MyHashMap() {
-        
+        map.resize(size);
+    }
+    
+    int hash(int key) {
+        return key%size;
     }
     
     void put(int key, int value) {
-        mp[key] = value;
+        int index = hash(key);
+        auto it = find_if(map[index].begin(), map[index].end(), [key](const pair<int, int> &a) {
+            return a.first == key;
+        });
+        if (it == map[index].end()) map[index].emplace_back(make_pair(key, value));
+        else it->second = value;
     }
     
     int get(int key) {
-        if (mp.count(key)) return mp[key];
+        int index = hash(key);
+        auto it = find_if(map[index].begin(), map[index].end(), [key](const pair<int, int> &a) {
+            return a.first == key;
+        });
+        if (it != map[index].end()) return it->second;
         return -1;
     }
     
     void remove(int key) {
-        mp.erase(key);
+        int index = hash(key);
+        auto it = find_if(map[index].begin(), map[index].end(), Compare(key));
+        if (it == map[index].end()) return;
+        map[index].erase(it);
     }
 };
 
