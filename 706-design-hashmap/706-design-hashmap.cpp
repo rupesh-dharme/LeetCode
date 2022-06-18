@@ -25,7 +25,7 @@ public:
     
     void put(int key, int value) {
         int index = hash(key);
-        auto it = find_if(map[index].begin(), map[index].end(), [key](const pair<int, int> &a) {
+        auto it = find_if(map[index].begin(), map[index].end(), [&, key](const pair<int, int> &a) {
             return a.first == key;
         });
         if (it == map[index].end()) map[index].emplace_back(make_pair(key, value));
@@ -34,7 +34,7 @@ public:
     
     int get(int key) {
         int index = hash(key);
-        auto it = find_if(map[index].begin(), map[index].end(), [key](const pair<int, int> &a) {
+        auto it = find_if(map[index].begin(), map[index].end(), [&key](const pair<int, int> &a) {
             return a.first == key;
         });
         if (it != map[index].end()) return it->second;
