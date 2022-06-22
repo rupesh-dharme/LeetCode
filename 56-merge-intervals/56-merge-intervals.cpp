@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> merge(vector<vector<int>>& intervals) { //sorting first value
         vector<vector<int>> result;
         if (intervals.size() == 0) return result;
         
